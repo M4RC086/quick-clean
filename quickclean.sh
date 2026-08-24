@@ -1,9 +1,13 @@
 #!/bin/bash
 
 
-
 folder=$1
+if [[ -z $1 ]]; then
+    folder=.
+fi
 
-for i in $folder/*; do
-    echo $i
+
+for file in $folder/*; do
+    echo $file
+    
 done
