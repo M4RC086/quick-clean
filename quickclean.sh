@@ -10,6 +10,7 @@ if [[ -z $1 ]]; then
 fi
 
 
+# Extensions per type of file
 TEXT=(doc docx eml msg odt pages rtf tex txt wpd)
 AUDIO=(mp3 mid ogg wav wma aif m3u m4a flac opus)
 VIDEOS=(3gp asf avi flv m4v mov mp4 mpg swf ts vob wmv mkv)
@@ -24,6 +25,7 @@ USED_FILE_TYPES=()
 
 
 
+# Check what folders will be used
 for type in ${FILE_TYPES[@]}; do
 
     for file in $FOLDER/*; do    
@@ -61,9 +63,10 @@ done
 
 
 
-mkdir $FOLDER/UNKNOWN -p
+# Move to "UNKNOWN" files with unknown extensions
 for thing in $FOLDER/*; do
     if [[ -f $thing ]]; then
+        mkdir $FOLDER/UNKNOWN -p
         mv "$thing" $FOLDER/UNKNOWN/
     fi
 done
