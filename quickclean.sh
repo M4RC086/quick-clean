@@ -21,3 +21,18 @@ FILE_TYPES=(AUDIO VIDEO IMAGE)
 for c_folder in ${FILE_TYPES[@]}; do
     mkdir $folder/${c_folder}
 done
+
+
+
+for file in $folder/*; do
+    for type in ${FILE_TYPES[@]}; do
+        declare -n c_type=$type 
+    
+        for ext in ${c_type[@]}; do
+            if [[ $file == *$ext ]]; then
+                mv $file $folder/$type
+                break
+            fi
+        done
+    done
+done
