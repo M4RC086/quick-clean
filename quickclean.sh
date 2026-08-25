@@ -10,10 +10,14 @@ if [[ -z $1 ]]; then
 fi
 
 
+TEXT=(doc docx eml msg odt pages rtf tex txt wpd)
+AUDIO=(mp3 mid ogg wav wma aif m3u m4a flac)
+VIDEO=(3gp asf avi flv m4v mov mp4 mpg swf ts vob wmv)
+IMAGE=(bmp dcm dds djvu gif heic jpg jpeg png psd tga tif)
+FILE_TYPES=(AUDIO VIDEO IMAGE)
 
 
-
-for file in $folder/*; do
-    echo $file
-    
+# Create the folders to orgaize the files
+for c_folder in ${FILE_TYPES[@]}; do
+    mkdir $folder/${c_folder}
 done
