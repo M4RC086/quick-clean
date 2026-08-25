@@ -60,11 +60,9 @@ done
 
 
 
-mkdir $FOLDER/_UNKNOWN -p
+mkdir $FOLDER/UNKNOWN -p
 for thing in $FOLDER/*; do
-    echo "Thing $thing"
     if [[ -f $thing ]]; then
         mv "$thing" $FOLDER/UNKNOWN/
-        echo $thing
     fi
 done
