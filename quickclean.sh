@@ -7,6 +7,9 @@ if [[ -z $1 ]]; then
 fi
 
 
+
+
+
 for file in $folder/*; do
     echo $file
     
