@@ -28,7 +28,7 @@ for type in ${FILE_TYPES[@]}; do
     for file in $FOLDER/*; do    
         declare -n c_type=$type 
         for ext in ${c_type[@]}; do
-            if [[ $file == *$ext ]]; then
+            if [[ ${file,,} == *$ext ]]; then
 
                 USED_FILE_TYPES+=($type)
                 break
@@ -52,7 +52,7 @@ for type in ${USED_FILE_TYPES[@]}; do
         declare -n c_type=$type 
     
         for ext in ${c_type[@]}; do
-            if [[ $file == *$ext ]]; then
+            if [[ ${file,,} == *$ext ]]; then
                 mv "$file" "$FOLDER/$type/"
                 break
             fi
