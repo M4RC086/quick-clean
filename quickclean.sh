@@ -53,7 +53,7 @@ for type in ${USED_FILE_TYPES[@]}; do
     
         for ext in ${c_type[@]}; do
             if [[ $file == *$ext ]]; then
-                mv $file $FOLDER/$type/
+                mv "$file" "$FOLDER/$type/"
                 break
             fi
         done
