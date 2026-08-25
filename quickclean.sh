@@ -57,3 +57,14 @@ for type in ${USED_FILE_TYPES[@]}; do
         done
     done
 done
+
+
+
+mkdir $FOLDER/_UNKNOWN -p
+for thing in $FOLDER/*; do
+    echo "Thing $thing"
+    if [[ -f $thing ]]; then
+        mv "$thing" $FOLDER/UNKNOWN/
+        echo $thing
+    fi
+done
