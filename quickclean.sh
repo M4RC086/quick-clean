@@ -40,9 +40,7 @@ done
 
 # Create the folders to organise the files
 for c_folder in ${USED_FILE_TYPES[@]}; do
-    if [[ ! (-d $FOLDER/$c_folder) ]]; then
-        mkdir $FOLDER/${c_folder}
-    fi
+        mkdir $FOLDER/${c_folder} -p
 done
 
 
