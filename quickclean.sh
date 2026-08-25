@@ -6,7 +6,7 @@ fi
 
 FOLDER=$1
 if [[ -z $1 ]]; then
-    FOLDER=.
+    FOLDER=$(pwd)
 fi
 
 
