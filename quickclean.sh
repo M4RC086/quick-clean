@@ -20,7 +20,7 @@ CODE=(appx c class cpp cs html css js h java kt lua m md pl py jsx sb3 sln swift
 COMPRESSED=(7z cbr deb gz pkg rar rpm tar.gz xapk zip zipx tar)
 DOCUMENTS=(pdf csv xlsx pptx)
 
-FILE_TYPES=(TEXT AUDIO VIDEOS IMAGES EXECUTABLES CODE COMPRESSED DOCUMENTS)
+FILE_TYPES=(TEXT AUDIO VIDEOS IMAGES EXECUTABLES CODE DOCUMENTS COMPRESSED)
 USED_FILE_TYPES=()
 
 
@@ -50,10 +50,11 @@ done
 # Move files into folders
 for type in ${USED_FILE_TYPES[@]}; do
     for file in "$FOLDER"/*; do
+        [[ -f $file ]] || continue
         declare -n c_type=$type 
     
         for ext in ${c_type[@]}; do
-            if [[ ${file,,} == *$ext ]]; then
+            if [[ ${file,,} == *"."$ext ]]; then
                 mv "$file" "$FOLDER/$type/"
                 break
             fi
