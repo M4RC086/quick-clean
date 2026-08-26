@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [[ $1 == help ]] || [[ $1 == -h ]]  || [[ $1 == --help ]]; then
     echo "Usage: quickclean [folder]" 
@@ -73,3 +74,5 @@ for thing in "$FOLDER"/*; do
         mv "$thing" "$FOLDER"/UNKNOWN/
     fi
 done
+
+ls "$FOLDER"
