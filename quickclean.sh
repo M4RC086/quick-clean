@@ -18,9 +18,9 @@ IMAGES=(bmp dcm dds djvu gif heic jpg jpeg png psd tga tif jpp sktz jxl pxd tiff
 EXECUTABLES=(apk app bat bin cmd com exe ipa jar run sh ex)
 CODE=(appx c class cpp cs html css js h java kt lua m md pl py jsx sb3 sln swift unity vb vcxproj xcodeproj yml rb php h hpp r sql php rs)
 COMPRESSED=(7z cbr deb gz pkg rar rpm tar.gz xapk zip zipx tar)
-PDFS=(pdf)
+DOCUMENTS=(pdf csv xlsx pptx)
 
-FILE_TYPES=(TEXT AUDIO VIDEOS IMAGES EXECUTABLES CODE COMPRESSED PDFS)
+FILE_TYPES=(TEXT AUDIO VIDEOS IMAGES EXECUTABLES CODE COMPRESSED DOCUMENTS)
 USED_FILE_TYPES=()
 
 
