@@ -12,5 +12,6 @@ The folder is optional. If it's empty, the actual folder will be cleaned
 
 ## ⚡INSTALLATION
 ```bash
+# Linux bash
 curl -fsSL https://raw.githubusercontent.com/M4RC086/quick-clean/main/setup.sh | bash
 ```
