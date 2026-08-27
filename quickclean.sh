@@ -81,4 +81,4 @@ for thing in "$FOLDER"/*; do
 done
  
 echo -- DONE! $NUM_FILES files cleaned --
-ls "$FOLDER"
+ls "$FOLDER" -l
