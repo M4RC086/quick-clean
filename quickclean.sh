@@ -32,7 +32,7 @@ USED_FILE_TYPES=()
 
 # Check what folders will be used
 for file in "$FOLDER"/*; do
-    file_extension="${file#*.}"
+    file_extension="${file##*.}"
 
     for type in ${FILE_TYPES[@]}; do
     
