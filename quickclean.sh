@@ -10,6 +10,8 @@ if [[ -z $1 ]]; then
     FOLDER=$(pwd)
 fi
 
+NUM_FILES=$(ls "$FOLDER/"| wc -l)
+
 
 # Extensions per type of file
 TEXT=(doc docx eml msg odt pages rtf tex txt wpd)
@@ -29,39 +31,42 @@ USED_FILE_TYPES=()
 
 
 # Check what folders will be used
-for type in ${FILE_TYPES[@]}; do
+for file in "$FOLDER"/*; do
+    file_extension="${file#*.}"
 
-    for file in "$FOLDER"/*; do    
-        declare -n c_type=$type 
-        for ext in ${c_type[@]}; do
-            if [[ ${file,,} == *$ext ]]; then
-
+    for type in ${FILE_TYPES[@]}; do
+    
+        declare -n c_type=$type
+ 
+        if [[ " ${c_type[*]} " == *" $file_extension "* ]]; then # Check if the file extension is on the array of this type 
+            if [[ ! " ${USED_FILE_TYPES[*]} " == *" $type "* ]]; then # Check duplicated types
                 USED_FILE_TYPES+=($type)
                 break
             fi
-        done
+        fi
     done
     
 done
 
 # Create the folders to organise the files
 for c_folder in ${USED_FILE_TYPES[@]}; do
-        mkdir "$FOLDER/${c_folder}" -p
+    mkdir "$FOLDER/${c_folder}" -p
 done
 
 
 # Move files into folders
-for type in ${USED_FILE_TYPES[@]}; do
-    for file in "$FOLDER"/*; do
-        [[ -f $file ]] || continue
-        declare -n c_type=$type 
+for file in "$FOLDER"/*; do
+    [[ -f $file ]] || continue
+    file_extension="${file#*.}"
+    for type in ${USED_FILE_TYPES[@]}; do
     
-        for ext in ${c_type[@]}; do
-            if [[ ${file,,} == *"."$ext ]]; then
-                mv "$file" "$FOLDER/$type/"
-                break
-            fi
-        done
+        declare -n c_type=$type 
+        
+        if [[ " ${c_type[*]} " == *" $file_extension "* ]]; then
+            mv "$file" "$FOLDER/$type/"
+            break
+        fi
+        
     done
 done
 
@@ -74,5 +79,6 @@ for thing in "$FOLDER"/*; do
         mv "$thing" "$FOLDER"/UNKNOWN/
     fi
 done
-
+ 
+echo -- DONE! $NUM_FILES files cleaned --
 ls "$FOLDER"
