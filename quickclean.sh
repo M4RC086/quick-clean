@@ -24,8 +24,9 @@ COMPRESSED=(7z cbr deb gz pkg rar rpm tar.gz xapk zip zipx tar)
 DOCUMENTS=(pdf csv xlsx pptx ppt)
 THREE_D=(3dm blend dae fbx max obj tf vrm ma stp part vsj mesh gh crz bbmodel)
 FONTS=(vfb pfa otf ttf fnt)
+SUBTITLES=(srt vtt ass ssa sbv lrc ttml pgs)
 
-FILE_TYPES=(TEXT THREE_D FONTS AUDIO VIDEOS IMAGES EXECUTABLES CODE DOCUMENTS COMPRESSED)
+FILE_TYPES=(TEXT THREE_D FONTS AUDIO VIDEOS IMAGES EXECUTABLES CODE DOCUMENTS COMPRESSED, SUBTITLES)
 used_file_types=()
 
 
