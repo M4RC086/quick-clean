@@ -23,24 +23,24 @@ CODE=(dll cfg go c appx wasm toml env xml hcl clj json graphql class cpp cs html
 COMPRESSED=(7z cbr deb gz pkg rar rpm tar.gz xapk zip zipx tar)
 DOCUMENTS=(pdf csv xlsx pptx ppt)
 THREE_D=(3dm blend dae fbx max obj tf vrm ma stp part vsj mesh gh crz bbmodel)
-FONTS=(vfb pfa ass rst otf ttf fnt)
+FONTS=(vfb pfa otf ttf fnt)
 
 FILE_TYPES=(TEXT THREE_D FONTS AUDIO VIDEOS IMAGES EXECUTABLES CODE DOCUMENTS COMPRESSED)
-USED_FILE_TYPES=()
+used_file_types=()
 
 
 
-# Check what folders will be used
+# Check what folders will be used and add them to [used_files_types]
 for file in "$FOLDER"/*; do
     file_extension="${file##*.}"
 
     for type in ${FILE_TYPES[@]}; do
     
-        declare -n c_type=$type
+        declare -n current_type=$type
  
-        if [[ " ${c_type[*]} " == *" $file_extension "* ]]; then # Check if the file extension is on the array of this type 
-            if [[ ! " ${USED_FILE_TYPES[*]} " == *" $type "* ]]; then # Check duplicated types
-                USED_FILE_TYPES+=($type)
+        if [[ " ${current_type[*]} " == *" $file_extension "* ]]; then # Check if the file extension is on the array of this type 
+            if [[ ! " ${used_file_types[*]} " == *" $type "* ]]; then # Check duplicated types
+                used_file_types+=($type)
                 break
             fi
         fi
@@ -48,21 +48,25 @@ for file in "$FOLDER"/*; do
     
 done
 
+
+
 # Create the folders to organise the files
-for c_folder in ${USED_FILE_TYPES[@]}; do
-    mkdir "$FOLDER/${c_folder}" -p
+for current_folder in ${used_file_types[@]}; do
+    mkdir "$FOLDER/${current_folder}" -p
 done
+
 
 
 # Move files into folders
 for file in "$FOLDER"/*; do
     [[ -f $file ]] || continue
     file_extension="${file#*.}"
-    for type in ${USED_FILE_TYPES[@]}; do
+
+    for type in ${used_file_types[@]}; do
     
-        declare -n c_type=$type 
+        declare -n current_type=$type # Strange thing that somehow works
         
-        if [[ " ${c_type[*]} " == *" $file_extension "* ]]; then
+        if [[ " ${current_type[*]} " == *" $file_extension "* ]]; then
             mv "$file" "$FOLDER/$type/"
             break
         fi
@@ -72,7 +76,7 @@ done
 
 
 
-# Move to "UNKNOWN" files with unknown extensions
+# Move to "UNKNOWN" the files that haven’t been moved
 for thing in "$FOLDER"/*; do
     if [[ -f $thing ]]; then
         mkdir "$FOLDER/UNKNOWN" -p
